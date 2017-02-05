@@ -10,8 +10,10 @@ app.use(bodyParser.json())
 
 const getClientAddr = () => {
   if (process.env.NODE_ENV === 'production') {
-    return 'https://femsnow.herokuapp.com/'
+    console.log('in production')
+    return 'https://net-gather.herokuapp.com/'
   } else {
+    console.log('not in production')
     return 'http://localhost:3000'
   }
 }
@@ -28,11 +30,11 @@ if (process.env.NODE_ENV === 'production') {
 
   console.log('path',__dirname )
 
-  app.use(serveStatic('client/public'))
+  app.use(serveStatic('/client/public'))
 
   // const handleRender = require(path.join(__dirname,'/client/dist/server.bundle.js'));
   app.use('/', (req, res) => {
-    sendFile('/client/index.html')
+    res.sendFile('/client/index.html')
   })
 
 }
