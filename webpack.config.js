@@ -15,7 +15,7 @@ function getEntry() {
 
 function getOutput() {
     if (process.env.NODE_ENV == 'production') {
-         return {  path: path.resolve(__dirname, 'public'), publicPath: '/', filename: '[name].js' }
+         return {  path: path.resolve(__dirname, 'public'), publicPath: '/', filename: 'main.js' }
     }
     return {
         path: path.resolve(__dirname, 'client/public'),
