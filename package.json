@@ -3,15 +3,16 @@
     "version": "1.0.0",
     "author": "Laura Zodrow",
     "scripts": {
+        "start": "node ./svr/server.js",
         "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./svr ./svr/server.js\" \"node ./client/svr/app.js\"",
-        "build": "webpack -- --config webpack.config",
-        "heroku-postbuild": "webpack && node ./svr/server.js"
+        "webpack": "webpack",
+        "heroku-postbuild": "webpack"
     },
     "engines": {
         "node": "7.4.0"
     },
     "description": "client for project",
-    "main": "index.js",
+    "main": "./client/src/index.js",
     "repository": {},
     "license": "MIT",
     "dependencies": {
