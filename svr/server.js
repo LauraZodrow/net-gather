@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 
   // const handleRender = require(path.join(__dirname,'/client/dist/server.bundle.js'));
   app.use('/', (req, res) => {
-    res.sendFile('/public/index.html')
+    res.sendFile('../client/src/index.html')
   })
 
 }
