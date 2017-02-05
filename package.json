@@ -3,8 +3,13 @@
     "version": "1.0.0",
     "author": "Laura Zodrow",
     "scripts": {
+        "start": "node ./svr/server.js",
         "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./svr ./svr/server.js\" \"node ./client/svr/app.js\"",
-        "build": "webpack -- -config webpack.config.js"
+        "build": "webpack -- -config webpack.config.js",
+        "heroku-postbuild": "webpack -- -config webpack.config.js"
+    },
+    "engines": {
+        "node": "7.4.0"
     },
     "description": "client for project",
     "main": "index.js",
