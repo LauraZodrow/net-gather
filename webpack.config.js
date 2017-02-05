@@ -6,7 +6,8 @@ const pkg = require('./package.json')
 const nodeExternals = require('webpack-node-externals');
 
 function getEntry() {
-    if (process.env.NODE_ENV === 'production') {
+    console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+    if (process.env.NODE_ENV == 'production') {
          return { path: './index.js' }
     } 
     return [ 'react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:3000/', 'webpack/hot/only-dev-server', './index.js']
