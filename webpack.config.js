@@ -53,10 +53,12 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                exclude: /node_modules/,
                 loaders: ['style', 'css', 'sass']
             },
             {
                 test: /\.json/,
+                exclude: /node_modules/,
                 loaders: ["json-loader"]
             },
         ]
