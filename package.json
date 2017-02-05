@@ -6,6 +6,7 @@
         "start": "node ./svr/server.js",
         "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./svr ./svr/server.js\" \"node ./client/svr/app.js\"",
         "webpack": "webpack",
+        "postinstall": "node ./svr/server.js",
         "heroku-postbuild": "webpack"
     },
     "engines": {
