@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "author": "Laura Zodrow",
     "scripts": {
-        "start": "node ./svr/server.js",
-        "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./svr ./svr/server.js\" \"node ./client/svr/app.js\"",
+        "start": "node ./server.js",
+        "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./api ./server.js\" \"node ./client/svr/app.js\"",
         "webpack": "webpack",
         "heroku-postbuild": "webpack"
     },
