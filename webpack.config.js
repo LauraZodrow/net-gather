@@ -24,9 +24,32 @@ function getOutput() {
     }
 }
 
+function getPlugin() {
+    if (process.env.NODE_ENV == 'production') {
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            compress: {
+            warnings: false
+            }
+        }) 
+    } 
+    return new webpack.HotModuleReplacementPlugin(),
+           new HtmlWebpackPlugin({
+              template: 'index.ejs',
+              title: 'Project'
+           })
+}
+
+function getDevTool() {
+    if (process.env.NODE_ENV == 'production') {
+        return 'source-map'
+    } 
+    return 'eval-source-map'
+}
+
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
-    devtool: 'eval-source-map',
+    devtool: getDevTool(),
     entry: getEntry(),
     output: getOutput(),
     externals: [nodeExternals()],
@@ -64,16 +87,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false
-            }
-        }),
-        new HtmlWebpackPlugin({
-            template: 'index.ejs',
-            title: 'Project'
-        }),
+        getPlugin()
     ],
     resolve: {
         modules: [
