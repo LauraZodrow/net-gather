@@ -5,6 +5,8 @@ import Root from './Root'
 
 if (process.env.NODE_ENV === 'production') {
 
+  console.log('in index.js near root!!!')
+
   ReactDOM.render(
     <Root />
     , document.getElementById('root')

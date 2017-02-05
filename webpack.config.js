@@ -33,11 +33,7 @@ function getPlugin() {
             }
         }) 
     } 
-    return new webpack.HotModuleReplacementPlugin(),
-           new HtmlWebpackPlugin({
-              template: 'index.ejs',
-              title: 'Project'
-           })
+    return new webpack.HotModuleReplacementPlugin()
 }
 
 function getDevTool() {
@@ -87,6 +83,10 @@ module.exports = {
         ]
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: 'index.ejs',
+            title: 'Project'
+        }),
         getPlugin()
     ],
     resolve: {
