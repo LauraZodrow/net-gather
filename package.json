@@ -5,7 +5,8 @@
     "scripts": {
         "start": "node ./svr/server.js",
         "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./svr ./svr/server.js\" \"node ./client/svr/app.js\"",
-        "build": "npm run webpack -- --config webpack.config",
+        "build": "webpack -- --config webpack.config",
+        "webpack": "webpack",
         "heroku-postbuild": "npm run webpack -- --config webpack.config"
     },
     "engines": {
