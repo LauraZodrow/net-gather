@@ -30,11 +30,11 @@ if (process.env.NODE_ENV === 'production') {
 
   console.log('path',__dirname )
 
-  app.use(serveStatic('/public'))
+  app.use(serveStatic(path.resolve(__dirname, '/public')))
 
   // const handleRender = require(path.join(__dirname,'/client/dist/server.bundle.js'));
   app.use('/', (req, res) => {
-    res.sendFile('../client/src/index.html')
+    res.sendFile(path.join(__dirname, '/index.html'))
   })
 
 }
