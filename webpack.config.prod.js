@@ -6,7 +6,7 @@ const pkg = require('./package.json')
 
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     entry: { path: './index.js' },
     output: {  
         path: path.resolve(__dirname, 'public'), 
@@ -50,7 +50,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,
             compress: {
-            warnings: false
+                warnings: false
             }
         }),
         new webpack.DefinePlugin({

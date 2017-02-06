@@ -6,7 +6,7 @@
         "start": "node ./server.js",
         "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./api ./server.js\" \"node ./client/svr/app.js\"",
         "webpack": "webpack",
-        "heroku-postbuild": "webpack -- --config webpack.config.prod"
+        "heroku-postbuild": "webpack --config ./webpack.config.prod.js"
     },
     "engines": {
         "node": "7.4.0"
