@@ -3,7 +3,6 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),

@@ -6,11 +6,9 @@
         we need to either modify this to accept custom headers,
         or just use a the low-level fetch directly in app
 */
-//const accessToken = '34307f5a38564203433687b6d647b36'
 const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
-    //'Authorization': 'Bearer ' + accessToken
 }
 
 /*
@@ -20,7 +18,7 @@ const headers = {
 // Add the server host to the URL
 function addHost(path) {
     if (process.env.NODE_ENV === 'production') {
-        return `https://femsnow.herokuapp.com/api${path}`
+        return `https://net-gather.herokuapp.com/api${path}`
     } else {
         return `http://localhost:3001/api${path}`
     }
