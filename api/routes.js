@@ -41,7 +41,7 @@ routes.get('/nyt-articles/:view', (req, res) => {
     let articles = []
     docs.map(( item )=> {
       if (item.multimedia[1]) {
-        imageUrl = 'http://www.nytimes.com/' + item.multimedia[1].url
+        imageUrl = 'https://www.nytimes.com/' + item.multimedia[1].url
       } else {
         imageUrl = getCatPlaceholder()
       }
