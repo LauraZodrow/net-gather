@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const CORS = require('cors');
 const serveStatic = require('serve-static')
+const routes = require('./api/routes')
 
 const app = express();
 
@@ -10,10 +11,8 @@ app.use(bodyParser.json())
 
 const getClientAddr = () => {
   if (process.env.NODE_ENV === 'production') {
-    console.log('in production')
     return 'https://net-gather.herokuapp.com/'
   } else {
-    console.log('not in production')
     return 'http://localhost:3000'
   }
 }
@@ -25,14 +24,12 @@ const cors = CORS({
 })
 
 app.use(cors)
+app.use('/api', routes)
 
 if (process.env.NODE_ENV === 'production') {
 
-  console.log('path',__dirname )
-
   app.use(serveStatic(__dirname + '/public'))
 
-  // const handleRender = require(path.join(__dirname,'/client/dist/server.bundle.js'));
   app.use('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'))
   })

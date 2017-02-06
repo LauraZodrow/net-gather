@@ -6,7 +6,6 @@ const pkg = require('./package.json')
 const nodeExternals = require('webpack-node-externals');
 
 function getEntry() {
-    console.log('process.env.NODE_ENV', process.env.NODE_ENV)
     if (process.env.NODE_ENV == 'production') {
          return { path: './index.js' }
     } 
@@ -20,7 +19,7 @@ function getOutput() {
     return {
         path: path.resolve(__dirname, 'client/public'),
         publicPath: 'http://localhost:3000/',
-        filename: 'bundle.js'
+        filename: 'main.js'
     }
 }
 
@@ -34,6 +33,7 @@ function getPlugin() {
         }) 
     } 
     return new webpack.HotModuleReplacementPlugin()
+    
 }
 
 function getDevTool() {
@@ -72,7 +72,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ['style', 'css', 'sass']
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.json/,
@@ -82,11 +82,11 @@ module.exports = {
         ]
     },
     plugins: [
+        getPlugin(),
         new HtmlWebpackPlugin({
-            template: 'index.ejs',
+            template: path.join(__dirname,'index.html'),
             title: 'Project'
         }),
-        getPlugin()
     ],
     resolve: {
         modules: [
