@@ -3,51 +3,16 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
-const nodeExternals = require('webpack-node-externals');
-
-function getEntry() {
-    if (process.env.NODE_ENV == 'production') {
-         return { path: './index.js' }
-    } 
-    return [ 'react-hot-loader/patch', 'webpack-dev-server/client?http://localhost:3000/', 'webpack/hot/only-dev-server', './index.js']
-}
-
-function getOutput() {
-    if (process.env.NODE_ENV == 'production') {
-         return {  path: path.resolve(__dirname, 'public'), publicPath: '/', filename: 'main.js' }
-    }
-    return {
-        path: path.resolve(__dirname, 'client/public'),
-        publicPath: 'http://localhost:3000/',
-        filename: 'main.js'
-    }
-}
-
-function getPlugin() {
-    if (process.env.NODE_ENV == 'production') {
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            compress: {
-            warnings: false
-            }
-        }) 
-    } 
-    return new webpack.HotModuleReplacementPlugin()
-    
-}
-
-function getDevTool() {
-    if (process.env.NODE_ENV == 'production') {
-        return 'source-map'
-    } 
-    return 'eval-source-map'
-}
 
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
-    devtool: getDevTool(),
-    entry: getEntry(),
-    output: getOutput(),
+    devtool: 'source-map',
+    entry: { path: './index.js' },
+    output: {  
+        path: path.resolve(__dirname, 'public'), 
+        publicPath: '/', 
+        filename: 'main.js'
+    },
     module: {
         rules: [
             { 
@@ -82,10 +47,16 @@ module.exports = {
         ]
     },
     plugins: [
-        getPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname,'index.html'),
-            title: 'Project'
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            compress: {
+            warnings: false
+            }
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
         }),
     ],
     resolve: {
