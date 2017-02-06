@@ -1,13 +1,14 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
 
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
     devtool: 'inline-source-map',
-    entry: { path: './index.js' },
+    entry: { 
+        path: './index.js' 
+    },
     output: {  
         path: path.resolve(__dirname, 'public'), 
         publicPath: '/', 
