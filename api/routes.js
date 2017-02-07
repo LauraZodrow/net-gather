@@ -5,7 +5,10 @@ const Feed = require('rss-to-json');
 const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
-const config = require('./config')
+
+if (process.env.NODE_ENV === 'production') {
+  const config = require('./config')
+}
 
 const routes = express.Router();
 
