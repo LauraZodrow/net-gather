@@ -5,6 +5,7 @@ const Feed = require('rss-to-json');
 const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
+const config = require('./config')
 
 const routes = express.Router();
 
@@ -27,7 +28,7 @@ routes.get('/nyt-articles/:view', (req, res) => {
   request.get({
     url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
     qs: {
-      'api-key': "f50cd2af9dcf4b18920c4dd01c793af1",
+      'api-key': config.NYT_KEY || process.env.NYT_KEY,
       'q': quary,
       'sort': "newest",
     },
@@ -55,11 +56,12 @@ routes.get('/nyt-articles/:view', (req, res) => {
       articles.push(article)
     })
  
-    if(err) {
-        res.send(body)
-    } else {
-        sendJson(res, articles)
+    const nytObject = {
+      type: 'nyt',
+      articles: articles
     }
+
+    sendJson(res, nytObject)
   })
 
 })
@@ -103,7 +105,11 @@ routes.get('/medium/:view', (req, res) => {
     ])
     .then(values => { 
       const results = _.flatten(values)
-      sendJson(res, results)
+      const medium = {
+        type: 'medium',
+        articles: results
+      }
+      sendJson(res, medium)
     });
 
   }

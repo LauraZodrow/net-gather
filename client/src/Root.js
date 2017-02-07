@@ -10,7 +10,7 @@ class Root extends Component {
   render() {
     return(
         <div>
-        
+
           <HeroSection 
             displayView={this.props.displayView} 
             view={this.props.view} 

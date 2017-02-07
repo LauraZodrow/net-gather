@@ -6,26 +6,45 @@ class Articles extends Component {
 
   componentDidMount() {
     const view = this.props.view
-    client.get('/nyt-articles/' + view).then(this.loadEvents)
-    client.get('/medium/' + view).then(this.loadEvents)
+    Promise.all([
+      client.get('/nyt-articles/' + view).then(this.loadArticles),
+      client.get('/medium/' + view).then(this.loadArticles)
+    ])
+    .then(response => {
+      return this.props.setData(response)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.view !== this.props.view) {
       const view = nextProps.view
-      client.get('/nyt-articles/' + view).then(this.loadEvents)
+      Promise.all([
+        client.get('/nyt-articles/' + view).then(this.loadArticles),
+        client.get('/medium/' + view).then(this.loadArticles)
+      ])
+      .then(response => {
+        return this.props.setData(response)
+      })
     }
   }
 
-  loadEvents = (response) => {
-    this.props.setData(response)
+  loadArticles = (response) => {
+    return response
   }
 
   render() {
     return(
       <div>
-        <Slider title="Recent NYT articles" data={ this.props.data } />
-        <Slider title="Recent Medium articles" data={this.props.data} />
+        { this.props.data.map( (item, index) => {
+            return (
+              <Slider 
+                key={ index } 
+                title={ 'Recent '+ item.type + ' articles' } 
+                data={ item.articles }
+              />
+            )
+          })
+        }
       </div>
     )
   }

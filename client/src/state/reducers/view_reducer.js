@@ -12,7 +12,7 @@ export const VIEW_ACTION_CREATORS = {
     }),
     setData: (data) => ({
         type: SET_DATA,
-        payload: [data]
+        payload: data 
     }),
 }
 
@@ -38,11 +38,11 @@ export default function viewReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_DATA: {
-            const [ data ] = action.payload
+        const data = action.payload
             
             return {
                 ...state,
-                data: data
+                data
             }
         }
 

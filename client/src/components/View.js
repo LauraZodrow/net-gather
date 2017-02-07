@@ -6,7 +6,11 @@ class View extends Component {
   render() {
     return(
       <div>
-        <Articles view={ this.props.view } data={ this.props.data } setData={ this.props.setData }/>
+        <Articles 
+          view={ this.props.view } 
+          data={ this.props.data } 
+          setData={ this.props.setData }
+        />
       </div>
     )
   }
