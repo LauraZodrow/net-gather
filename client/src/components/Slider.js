@@ -36,7 +36,6 @@ class Slider extends Component {
         displayRightArrow: false 
       })
     } else if (dataLength !== this.state.moveSliderAmount && arrow === 100) {
-      console.log('in equal eachother, right arrow true')
       this.setState({ 
         moveSliderAmount: calc, 
         displayRightArrow: true 

@@ -19,11 +19,6 @@ import configureStore from './state/configureStore'
 //     }
 // }
 const store = configureStore()
-console.log('store:', store.getState(), store)
-// const store = createStore(
-//   rootReducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
 
 if (process.env.NODE_ENV === 'production') {
 
@@ -31,31 +26,34 @@ if (process.env.NODE_ENV === 'production') {
     <Provider store={store}>
       <Root />
     </Provider>
-  , document.getElementById('react-root')
+  , document.getElementById('root')
   );
 
 } 
 else {
-  const render = Component => {
-    ReactDOM.render((
-      <AppContainer>
-        <Provider store={store}>
-          <Component />
-        </Provider>
-      </AppContainer>
-    ), document.getElementById('react-root'))
-  }
 
-  render(Root)
+  ReactDOM.render((
+    <AppContainer>
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    </AppContainer>
+  ), document.getElementById('root'))
   
 
   if (module.hot) {
-  module.hot.accept('./Root.js', () => {
-    console.log('Module hot reloading')
-    const NewRoot = require('./Root.js').default;
-    render(NewRoot)
-  });
-}
+    module.hot.accept('./Root.js', () => {
+      const NewRoot = require('./Root.js').default;
+      ReactDOM.render(
+        <AppContainer>
+          <Provider store={store}>
+            <NewRoot />
+          </Provider>
+        </AppContainer>
+        , document.getElementById('root')
+      );
+    });
+  }
 
 }
 

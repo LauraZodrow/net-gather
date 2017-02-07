@@ -11,7 +11,6 @@ class Articles extends Component {
       client.get('/medium/' + view).then(this.loadArticles)
     ])
     .then(response => {
-      console.log('Data from mount!', this._unmounted)
       if (this._unmounted) {
         return
       }
@@ -33,7 +32,6 @@ class Articles extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Gonezo')
     this._unmounted = true
   }
 

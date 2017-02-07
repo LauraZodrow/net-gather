@@ -4,26 +4,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
 
-console.log('Webpack called?')
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
     devtool: 'eval-source-map',
     entry: [ 
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:8080/', 
-        'webpack/hot/only-dev-server', 
+        'webpack/hot/only-dev-server',
         './index.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'client/public'),
-        publicPath: '/',
+        path: path.resolve(__dirname, 'client'),
+        publicPath: 'http://localhost:8080/',
         filename: 'main.js'
     },
-    devServer: {
-        hot: true,
-        contentBase: path.resolve(__dirname, 'client/public'),
-        publicPath: '/'
-    },
+    watch: true,
     module: {
         rules: [
             { 
@@ -63,7 +58,8 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname,'index.html'),
-            title: 'Project'
+            title: 'Project',
+            inject: false 
         }),
     ],
     resolve: {

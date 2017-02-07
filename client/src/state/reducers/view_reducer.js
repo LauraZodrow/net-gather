@@ -17,8 +17,8 @@ export const VIEW_ACTION_CREATORS = {
 }
 
 export const INITIAL_STATE = {
-  displayView: true,
-  view: 'coding',
+  displayView: false,
+  view: null,
   data: null,
   intitiated: Date.now()
 }

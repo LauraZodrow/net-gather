@@ -9,7 +9,7 @@ class View extends Component {
         <a target="_blank" className="white-round-btn" href="https://github.com/LauraZodrow/net-gather"><i className="fa fa-github" aria-hidden="true"></i>Github</a>
         <a target="_blank" className="white-round-btn" href="https://www.linkedin.com/in/laurazodrow"><i className="fa fa-linkedin-square" aria-hidden="true"></i>LinkedIn</a>
         <div className="contact-link">
-            <a target="_blank" href="mailto:laura.zodrow@gmail.com?Subject=Net-Gather%20Website">Contact me</a>
+            <a href="mailto:laura.zodrow@gmail.com?Subject=Net-Gather%20Website">Contact me</a>
         </div>
       </footer>
     )
