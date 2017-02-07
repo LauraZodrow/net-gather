@@ -4,19 +4,25 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
 
+console.log('Webpack called?')
 module.exports = {
     context: path.resolve(__dirname, 'client/src'),
     devtool: 'eval-source-map',
     entry: [ 
-        'react-hot-loader/patch', 
-        'webpack-dev-server/client?http://localhost:3000/', 
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:8080/', 
         'webpack/hot/only-dev-server', 
         './index.js'
     ],
     output: {
         path: path.resolve(__dirname, 'client/public'),
-        publicPath: 'http://localhost:3000/',
+        publicPath: '/',
         filename: 'main.js'
+    },
+    devServer: {
+        hot: true,
+        contentBase: path.resolve(__dirname, 'client/public'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -24,6 +30,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
+                include: path.join(__dirname),
                 query: {
                     presets: ['react', 'es2015', 'stage-1', "babel-preset-react"],
                     plugins: [ "react-hot-loader/babel"],
@@ -53,6 +60,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname,'index.html'),
             title: 'Project'

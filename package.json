@@ -4,7 +4,7 @@
     "author": "Laura Zodrow",
     "scripts": {
         "start": "node ./server.js",
-        "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./api ./server.js\" \"node ./client/svr/app.js\"",
+        "dev": "concurrently --kill-others \"./node_modules/.bin/nodemon --watch ./api ./server.js\" \"webpack-dev-server --config webpack.config.dev.js\"",
         "webpack": "webpack",
         "heroku-postbuild": "npm rebuild node-sass && webpack --config ./webpack.config.prod.js"
     },
@@ -43,13 +43,14 @@
         "serve-static": "^1.11.2",
         "style-loader": "^0.13.1",
         "url-loader": "^0.5.6",
-        "webpack": "v2.2.0-rc.4"
+        "webpack": "v2.2.0-rc.4",
+        "webpack-dev-server": "^2.3.0"
     },
     "devDependencies": {
         "concurrently": "^3.1.0",
         "nodemon": "^1.11.0",
+        "redux-devtools-extension": "^2.13.0",
         "webpack-dev-middleware": "^1.6.1",
-        "webpack-dev-server": "^2.3.0",
         "webpack-hot-middleware": "^2.10.0"
     }
 }

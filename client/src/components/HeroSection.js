@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import heroImg from '../assets/blackandwhitehero.jpg'
+import setLocalStorage from '../utils/setLocalStorage'
 
 class HeroSection extends Component {
 
   handleViewSwitch = (view) => () => {
-    return this.props.setDisplayView(view)
+      setLocalStorage(view)
+      this.props.setDisplayView(view)
   }
 
   render() {

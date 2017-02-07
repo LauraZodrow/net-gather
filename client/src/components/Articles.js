@@ -11,6 +11,10 @@ class Articles extends Component {
       client.get('/medium/' + view).then(this.loadArticles)
     ])
     .then(response => {
+      console.log('Data from mount!', this._unmounted)
+      if (this._unmounted) {
+        return
+      }
       return this.props.setData(response)
     })
   }
@@ -28,11 +32,19 @@ class Articles extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('Gonezo')
+    this._unmounted = true
+  }
+
   loadArticles = (response) => {
     return response
   }
 
   render() {
+    if (this.props.data == null) {
+      return null
+    }
     return(
       <div>
         { this.props.data.map( (item, index) => {
@@ -45,7 +57,7 @@ class Articles extends Component {
             )
           })
         }
-      </div>
+     </div>
     )
   }
 }

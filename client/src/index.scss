@@ -36,6 +36,14 @@ body {
     color: $pink;
 } 
 
+.white-round-btn {
+    @extend .round-button;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid $white;
+    font-size: 14px;
+}
+
 .hero-container {
     background-size: cover;
     background-position: center;
@@ -123,6 +131,41 @@ body {
                     font-size: 20px;
                     color: #fff;
                 }
+            }
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    background-color: $darkGray;
+    margin-top: 50px;
+    padding: 50px;
+    color: $white;
+    i {
+        margin-right: 5px;
+    }
+    .footer-heading {
+        margin-bottom: 25px;
+    }
+    .contact-link {
+        margin-top: 20px;
+        a {
+            color: $white;
+            text-decoration: none;
+            &:hover {
+                color: $hoverColor;
+            }
+        }
+    }
+    .white-round-btn {
+        &:hover {
+            color: $hoverColor;
+            border-color: $hoverColor;
+        }
+        i {
+            &:hover {
+                color: $hoverColor;
             }
         }
     }

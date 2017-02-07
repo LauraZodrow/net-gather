@@ -6,21 +6,28 @@ const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
 
+let config
 if (process.env.NODE_ENV !== 'production') {
-  const config = require('./config')
+  config = require('./config')
 }
 
 const routes = express.Router();
 
+let lastResults = {}
+
 const feedLoadPromise = url => {
   return new Promise((resolve, reject) => {
-    Feed.load(url, (err, data) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(data)
-      }
-    })
+    if (lastResults[url]) {
+      resolve(lastResults[url])
+    } else {
+      Feed.load(url, (err, data) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(data)
+        }
+      })
+    }
   })
 }
 
@@ -113,16 +120,19 @@ routes.get('/medium/:view', (req, res) => {
         articles: results
       }
       sendJson(res, medium)
-    });
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
 
   } else if ('coding') {
 
     Promise.all([
-      feedLoadPromise('https://medium.freecodecamp.com/feed')
+      feedLoadPromise('https://backchannel.com/feed')
       .then( results => {
         return mapArray(results.items)
       }),
-      feedLoadPromise('https://backchannel.com/feed')
+      feedLoadPromise('https://medium.freecodecamp.com/feed')
       .then( results => {
         return mapArray(results.items)
       }),
@@ -138,6 +148,9 @@ routes.get('/medium/:view', (req, res) => {
         articles: results
       }
       sendJson(res, medium)
+    })
+    .catch(err => {
+      console.log('err', err)
     });
   
   }

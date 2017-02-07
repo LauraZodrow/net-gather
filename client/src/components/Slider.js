@@ -50,7 +50,6 @@ class Slider extends Component {
     let moveSlideStyles = {
       transform: 'translate3d('+ this.state.moveSliderAmount +'%, 0px, 0px)'
     }
-
     return(
       <div className="slider-overflow">
 

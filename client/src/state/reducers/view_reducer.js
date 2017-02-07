@@ -17,9 +17,9 @@ export const VIEW_ACTION_CREATORS = {
 }
 
 export const INITIAL_STATE = {
-  displayView: false,
-  view: null,
-  data: []
+  displayView: true,
+  view: 'coding',
+  data: null
 }
 
 // the store then calls this function with the action object
