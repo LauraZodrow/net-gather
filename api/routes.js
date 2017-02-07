@@ -69,25 +69,25 @@ routes.get('/nyt-articles/:view', (req, res) => {
 routes.get('/medium/:view', (req, res) => {
   const view = req.params.view
 
-  if (view == 'feminism') {
+  const mapArray = (items) => {
+    const array = _.map(items, ( item ) => {
+      const fullDescription = item.description.split('"')
+      if (!fullDescription[7]) {
+        imageURL = getCatPlaceholder()
+      } else {
+        imageURL = fullDescription[7]
+      }
+      return [
+        item.title,
+        item.url,
+        imageURL,
+        getOverlayColorPicker()
+      ]
+    })
+    return array
+  }
 
-    const mapArray = (items) => {
-      const array = _.map(items, ( item ) => {
-        const fullDescription = item.description.split('"')
-        if (!fullDescription[7]) {
-          imageURL = getCatPlaceholder()
-        } else {
-          imageURL = fullDescription[7]
-        }
-        return [
-          item.title,
-          item.url,
-          imageURL,
-          getOverlayColorPicker()
-        ]
-      })
-      return array
-    }
+  if (view == 'feminism') {
 
     Promise.all([
       feedLoadPromise('https://femsplain.com/feed')
@@ -112,6 +112,31 @@ routes.get('/medium/:view', (req, res) => {
       sendJson(res, medium)
     });
 
+  } else if ('coding') {
+
+    Promise.all([
+      feedLoadPromise('https://medium.freecodecamp.com/feed')
+      .then( results => {
+        return mapArray(results.items)
+      }),
+      feedLoadPromise('https://backchannel.com/feed')
+      .then( results => {
+        return mapArray(results.items)
+      }),
+      feedLoadPromise('https://hackernoon.com/feed')
+      .then( results => {
+        return mapArray(results.items)
+      })
+    ])
+    .then(values => { 
+      const results = _.flatten(values)
+      const medium = {
+        type: 'medium',
+        articles: results
+      }
+      sendJson(res, medium)
+    });
+  
   }
 
 });
