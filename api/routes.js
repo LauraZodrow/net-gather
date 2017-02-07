@@ -6,7 +6,7 @@ const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
   const config = require('./config')
 }
 
