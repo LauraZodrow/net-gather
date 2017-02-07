@@ -6,7 +6,7 @@ const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
 
-let config
+let config = {}
 if (process.env.NODE_ENV !== 'production') {
   config = require('./config')
 }
@@ -14,9 +14,6 @@ if (process.env.NODE_ENV !== 'production') {
 const routes = express.Router();
 
 let lastResults = {}
-
-console.log('process.env', process.env)
-  console.log('process.envNYT_KEY', process.env.NYT_KEY)
 
 const feedLoadPromise = url => {
   return new Promise((resolve, reject) => {
