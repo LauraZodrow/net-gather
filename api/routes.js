@@ -15,6 +15,9 @@ const routes = express.Router();
 
 let lastResults = {}
 
+console.log('process.env', process.env)
+  console.log('process.envNYT_KEY', process.env.NYT_KEY)
+
 const feedLoadPromise = url => {
   return new Promise((resolve, reject) => {
     if (lastResults[url]) {

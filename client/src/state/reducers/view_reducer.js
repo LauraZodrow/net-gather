@@ -19,7 +19,8 @@ export const VIEW_ACTION_CREATORS = {
 export const INITIAL_STATE = {
   displayView: true,
   view: 'coding',
-  data: null
+  data: null,
+  intitiated: Date.now()
 }
 
 // the store then calls this function with the action object
@@ -38,6 +39,7 @@ export default function viewReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_DATA: {
+            console.log('Initiated:', state.intitiated)
         const data = action.payload
             
             return {

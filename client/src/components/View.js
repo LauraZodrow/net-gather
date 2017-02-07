@@ -9,7 +9,7 @@ import Events from './Events'
 
 class View extends Component {
   render() {
-    console.log('displayView in View:', this.props.displayView, this._reactInternalInstance._debugID)
+    console.log('displayView in View:', this._reactInternalInstance._debugID, this.props.initiated)
     return(
         <div>
 
