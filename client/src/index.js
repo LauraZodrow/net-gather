@@ -5,19 +5,6 @@ import Root from './Root'
 import { Provider } from 'react-redux'
 import configureStore from './state/configureStore'
 
-// const view = localStorage.getItem('view')
-// let displayView = false
-// if (view) {
-//   displayView = true
-// } 
-
-// const initialState = {
-//   view: {
-//       displayView: displayView,
-//       view: view,
-//       data: []
-//     }
-// }
 const store = configureStore()
 
 if (process.env.NODE_ENV === 'production') {

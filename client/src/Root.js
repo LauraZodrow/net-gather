@@ -11,9 +11,12 @@ import './index.scss'
 class Root extends Component {
   render() {
     return(
-        <div>
+        <div className="slide-container">
 
           <HeroSection 
+            view={ this.props.view } 
+            twitterBtnText = { this.props.twitterBtnText }
+            setTwitterBtnText= { this.props.setTwitterBtnText }
             setDisplayView={ this.props.setDisplayView } 
           />
 
@@ -40,7 +43,9 @@ Root.propTypes = {
   view: PropTypes.string,
   setDisplayView: PropTypes.func,
   data: PropTypes.array,
-  setData: PropTypes.func
+  setData: PropTypes.func,
+  twitterBtnText: PropTypes.string,
+  setTwitterBtnText: PropTypes.func
 }
 
 function mapStateToProps(state) {

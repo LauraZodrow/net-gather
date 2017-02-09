@@ -59,12 +59,14 @@ body {
     h1 {
         color: $pink;
         font-size: 45px;
-        text-shadow: 1px 1px gray;
         line-height: 50px;
+    }
+    .sub-heading {
+        color: $white;
     }
     .line-through {
         text-decoration: line-through;
-    }   
+    }  
 }
 
 .slider-overflow {
@@ -168,5 +170,125 @@ footer {
                 color: $hoverColor;
             }
         }
+    }
+}
+
+// TODO: Make Mobile Friendly
+// @media screen and (max-width: 1030px) {
+//     .slider-overflow  {
+//         .slider {
+//             .slide {
+//                 width: 33.33333333%
+//             }
+//             .arrow-right,
+//             .arrow-left {
+//                 width: 10%;
+//             }
+//         }
+//     }
+// }
+
+// @media screen and (max-width: 748px) {
+//     .slider-overflow  {
+//         .slider {
+//             .slide {
+//                 width: 50%
+//             }
+//         }
+//     }
+// }
+
+// @media screen and (max-width: 530px) {
+//     .slider-overflow  {
+//         .slider {
+//             .slide {
+//                 width: 100%
+//             }
+//             .arrow-right,
+//             .arrow-left {
+//                 width: 15%;
+//             }
+//         }
+//     }
+// }
+
+
+// .slide-container {
+//     width: 100vw;
+//     height: 100vh;
+//     .hero-container {
+//         width: 100vw;
+//         height: 45%;
+//         animation: 10s slide-up ease;
+//         //margin-top:0%;
+//     }
+// }
+
+// @keyframes slide-up {
+//   from {
+//     margin-top: 0%;
+//     height: 100%; 
+//   }
+
+//   to {
+//     margin-top: 0%;
+//     height: 45%;
+//   }
+// }
+
+.twitterFeedSidebarContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    background-color: $darkGray;
+    height: 100%;
+    z-index: 3;
+    padding: 30px 20px;
+    overflow: scroll;
+    .tweet {
+        margin: 15px auto;
+        border: 1px solid lightgray;
+        border-radius: 30px;
+        padding: 20px 25px;
+        overflow: hidden;
+        background-color: #fff;
+        .profile-img {
+            width: 13%;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .text {
+            width: 87%;
+            display: inline-block;
+            p {
+                margin: 0px auto;
+            }
+            .username {
+                color: gray;
+                text-decoration: none;
+                margin-bottom: 4px;
+            }
+        }
+    }
+    .close-sidebar {
+        position: absolute;
+        left: 10px;
+        font-size: 20px;
+        top: 10px;
+        border: none;
+        color: $pink;
+        background: transparent;
+    }
+}
+
+.twitter-feed-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    .twitter-view {
+        text-transform: uppercase;
     }
 }

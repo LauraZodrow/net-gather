@@ -1,6 +1,7 @@
 /* eslint no-fallthrough: 0 react/no-multi-comp: 0*/
 export const SET_DISPLAY_VIEW = 'view: SET DISPLAY VIEW'
 export const SET_DATA = 'view: SET DATA'
+export const SET_TWITTER_BTN_TEXT = 'view: SET TWITTER BTN TEXT'
  
 // function calls action creater setTokenId 
 // that returns the object with type and payload and that's called the action
@@ -14,13 +15,23 @@ export const VIEW_ACTION_CREATORS = {
         type: SET_DATA,
         payload: data 
     }),
+    setTwitterBtnText: (text) => ({
+        type: SET_TWITTER_BTN_TEXT,
+        payload: { text }
+    }),
 }
 
+// const view = localStorage.getItem('view')
+// let displayView = false
+// if (view) {
+//   displayView = true
+// } 
+
 export const INITIAL_STATE = {
-  displayView: false,
-  view: null,
-  data: null,
-  intitiated: Date.now()
+    displayView: true,
+    view: 'feminism',
+    data: [],
+    twitterBtnText: 'feminism'
 }
 
 // the store then calls this function with the action object
@@ -39,12 +50,20 @@ export default function viewReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_DATA: {
-            console.log('Initiated:', state.intitiated)
-        const data = action.payload
+            const data = action.payload
             
             return {
                 ...state,
                 data
+            }
+        }
+
+        case SET_TWITTER_BTN_TEXT: {
+            const { text } = action.payload
+            
+            return {
+                ...state,
+                twitterBtnText: text
             }
         }
 

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const CORS = require('cors');
 const serveStatic = require('serve-static')
 const routes = require('./api/routes')
+const socket = require('./api/socket')
 
 const app = express();
 
@@ -36,7 +37,8 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
-//const server = 
-app.listen(process.env.PORT || 3001, () => {
-    console.log("API listening");
+const server = app.listen(process.env.PORT || 3001, () => {
+    console.log("API listening at PORT:" + process.env.PORT);
 });
+
+socket(server)
