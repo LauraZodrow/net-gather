@@ -5,6 +5,9 @@ const CORS = require('cors');
 const serveStatic = require('serve-static')
 const routes = require('./api/routes')
 const socket = require('./api/socket')
+// const mongoose = require('mongoose');
+// const ArticleData = require('./models/articleData');
+// const config = require('./config')
 
 const app = express();
 
@@ -12,7 +15,7 @@ app.use(bodyParser.json())
 
 const getClientAddr = () => {
   if (process.env.NODE_ENV === 'production') {
-    return 'https://net-gather.herokuapp.com/'
+    return 'https://net-gather.herokuapp.com'
   } else {
     return 'http://localhost:8080'
   }
@@ -23,6 +26,11 @@ const cors = CORS({
     methods: ['GET', 'POST'],
     credentials: true
 })
+
+// mongoose.connect(config.database)
+// mongoose.connection.on('error', function() {
+//   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
+// });
 
 app.use(cors)
 app.use('/api', routes)
