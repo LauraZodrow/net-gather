@@ -1,47 +1,84 @@
-const Twitter = require('twitter')
-const socketio = require('socket.io')
+module.exports = function(io, twitter) {
 
-const twitter = new Twitter({
-  consumer_key: "BSN8JOEEDLCB4EOgSJT8hTWWO",
-  consumer_secret: "H9j6bCuUl48CpoVOc4MNnxgpdnGrhc7gaMzTePnAnKcSqDr80u",
-  access_token_key: "468388067-VkXEzmvpdXoVpOYgeXrq1VcHAWDyDQKvKbYVw5fQ",
-  access_token_secret: "cgrmisBMM6yhQiq3tRWBuGzRoLRk7NfeICKShgYbY5yFa"
-})
+  function createStream (keyword) {
+    var stream = twitter.stream('statuses/filter', {track : keyword, language: 'en'})
+      stream.on('tweet', function (tweet) {
+      let tweetUrl = null
+      let imageUrl = null
+      if (tweet.entities.media) {
+          tweetUrl = tweet.entities.media[0].expanded_url
+      }
+      if (tweet.user.profile_image_url) {
+          imageUrl = tweet.user.profile_image_url
+      }
+      const newData = [
+          tweet.text,
+          tweetUrl,
+          imageUrl,
+          tweet.user.screen_name
+      ]
+      io.sockets.emit("twitter-stream", newData);
+    })
+    stream.on('error', function(error) {
+      return console.log('error', error)
+    })
+    stream.on('limit', function (limitMessage) {
+      console.log('limitMessage', limitMessage)
+    })
+    stream.on('connected', function (response) {
+      //console.log('is connected!')
+    })
 
-
-//TODO: close socket after certain amount of time
-
-module.exports = function(server) {
-  const io = socketio.listen(server)
-  io.on('connection', function(socket){
-  socket.on("start stream", function(data) {
-    twitter.stream('statuses/filter', { track: data.view }, (streamResponse) => {
-        streamResponse.on('data', (data) => {
-        let tweetUrl = null
-        let imageUrl = null
-        if (data.entities.media) {
-            tweetUrl = data.entities.media[0].expanded_url
-        }
-        if (data.user.profile_image_url) {
-            imageUrl = data.user.profile_image_url
-        }
-        const newData = [
-            data.text,
-            tweetUrl,
-            imageUrl,
-            data.user.screen_name
-        ]
-
-        socket.emit("new tweet", newData);
-        });
+    return stream
     
-        streamResponse.on('error', (error) => {
-        socket.emit("twitter error");
-        });
+  }
+
+  let stream = null
+  let currentSockets = 0
+  let currentKeyword = null
+
+  io.sockets.on('connection', function(socket){
+
+    currentSockets++;
+
+    socket.emit('connected', currentKeyword); 
+
+    if (currentKeyword === null && stream === null) {    
+      socket.on('start-stream', function(data) {
+        currentKeyword = data.view
+        stream = createStream(data);
+      })
+    } else if (currentKeyword !== null && stream === null) {
+      stream = createStream(currentKeyword);
+    }
+    
+
+    socket.on('disconnect', function () {
+        currentSockets--; 
+
+        if (stream !== null && currentSockets <= 0) {   
+            stream.stop(); 
+            stream = null;
+            currentSockets = 0;
+            console.log('No active sockets, disconnecting from stream');
+        }
     });
 
-  });
+    socket.on('keyword-change', function (keyword) {   
+      console.log('keyword', keyword)
+        if (stream !== null) {   
+            stream.stop(); 
+            console.log('Stream Stopped'); 
+        }
 
-});
+        stream = createStream(keyword); 
+
+        currentKeyword = keyword; 
+
+        io.sockets.emit('keyword-changed', currentKeyword); 
+
+        console.log('Stream restarted with keyword => ' + currentKeyword);
+    });
+
+  })
 }
-

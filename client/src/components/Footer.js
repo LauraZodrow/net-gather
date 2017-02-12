@@ -5,7 +5,7 @@ class View extends Component {
   render() {
     return(
       <footer className="footer">
-        <p className="footer-heading">Designed and Devoloped by Laura Zodrow</p>
+        <p className="footer-heading">Designed and Developed by Laura Zodrow</p>
         <a target="_blank" className="white-round-btn" href="https://github.com/LauraZodrow/net-gather"><i className="fa fa-github" aria-hidden="true"></i>Github</a>
         <a target="_blank" className="white-round-btn" href="https://www.linkedin.com/in/laurazodrow"><i className="fa fa-linkedin-square" aria-hidden="true"></i>LinkedIn</a>
         <div className="contact-link">

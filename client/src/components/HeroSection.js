@@ -25,7 +25,7 @@ class HeroSection extends Component {
             <h1>I'm interested in coding and feminism.</h1>
             <p className="sub-heading">binge <span className="line-through">watch</span> read</p>
             <div>
-              <button onClick={ this.handleViewSwitch('coding') } className="round-button">Coding</button>
+              <button onClick={ this.handleViewSwitch('javascript') } className="round-button">Javascript</button>
               <button onClick={ this.handleViewSwitch('feminism') } className="round-button">Feminism</button>
             </div>
           </div>

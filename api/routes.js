@@ -5,6 +5,8 @@ const Feed = require('rss-to-json');
 const getOverlayColorPicker = require('./utils/overlayColorPicker')
 const getCatPlaceholder = require('./utils/catPlaceholderPicker')
 const _ = require('lodash')
+// const ArticleData = require('../models/articleData')
+// const mongoose = require('mongoose');
 
 let config = {}
 if (process.env.NODE_ENV !== 'production') {
@@ -60,8 +62,7 @@ routes.get('/nyt-articles/:view', (req, res) => {
         item.headline.main,
         item.web_url,
         imageUrl,
-        getOverlayColorPicker(),
-        item.snippet
+        getOverlayColorPicker()
       ]
       articles.push(article)
     })
@@ -70,6 +71,17 @@ routes.get('/nyt-articles/:view', (req, res) => {
       type: 'nyt',
       articles: articles
     }
+
+    // newArticleData = ArticleData({
+    //   type: 'nyt',
+    //   articles: articles
+    // })
+
+    // newArticleData.save(function(err) {
+    //   if (err) throw err;
+
+    //   console.log('newArticleData created!');
+    // });
 
     sendJson(res, nytObject)
   })
