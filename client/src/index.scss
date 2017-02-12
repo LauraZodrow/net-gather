@@ -277,8 +277,11 @@ footer {
             }
         }
     }
-    .twit-waiting-msg {
+    .twit-status-msg {
         color: $white;
+        margin-top: 40%;
+        width: 100%;
+        text-align: center;
     }
     .close-sidebar {
         position: absolute;

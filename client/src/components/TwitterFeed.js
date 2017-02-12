@@ -14,7 +14,7 @@ class TwitterFeed extends Component {
   state = {
     twitterData: [],
     showSideBar: false,
-    waitingMessage: true
+    twitterStatusMessage: 'Twitter feed is loading, please wait'
   }
 
   componentDidMount() {
@@ -23,12 +23,12 @@ class TwitterFeed extends Component {
       //console.log('currentKeyword', currentKeyword)
     })
     socket.on("twitter-stream", this.loadTwitterFeed)
-    socket.on("twitter error", this.showFeedError)
+    socket.on("limit", this.showFeedError)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.view !== this.props.view) {
-      this.setState( { twitterData: [], waitingMessage: true } )
+      this.setState( { twitterData: [], twitterStatusMessage: 'Twitter feed is loading, please wait' } )
       socket.emit('keyword-change', nextProps.view )
     }
   }
@@ -40,7 +40,7 @@ class TwitterFeed extends Component {
       const newArr = combineData.slice(0, 20)
       this.setState({ twitterData: newArr })
     } else {
-      this.setState({ twitterData: combineData, waitingMessage: false })
+      this.setState({ twitterData: combineData, twitterStatusMessage: null })
     }
   }
 
@@ -49,7 +49,7 @@ class TwitterFeed extends Component {
   }
 
   showFeedError = () => {
-      //TODO: display error messaging
+      this.setState({ twitterStatusMessage: 'Twitter Streaming Limit Hit, please try again later' })
   }
 
   handleCloseSidbar = () => {
@@ -63,7 +63,7 @@ class TwitterFeed extends Component {
        { this.state.showSideBar ? 
            <div className="twitterFeedSidebarContainer">
             <button className="close-sidebar" onClick={this.handleCloseSidbar} >X</button>
-            { this.state.waitingMessage ? <p className="twit-waiting-msg">Twitter feed is loading, please wait</p> : null}
+            { this.state.twitterStatusMessage ? <p className="twit-status-msg">{ this.state.twitterStatusMessage }</p> : null }
             { this.state.twitterData.map(function(tweet, index) {
                 return (
                   <Tweets

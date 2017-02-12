@@ -23,7 +23,7 @@ module.exports = function(io, twitter) {
       return console.log('error', error)
     })
     stream.on('limit', function (limitMessage) {
-      console.log('limitMessage', limitMessage)
+      io.sockets.emit("limit");
     })
     stream.on('connected', function (response) {
       //console.log('is connected!')
