@@ -11,9 +11,6 @@ class Articles extends Component {
       client.get('/medium/' + view).then(this.loadArticles)
     ])
     .then(response => {
-      if (this._unmounted) {
-        return
-      }
       return this.props.setData(response)
     })
   }
@@ -29,10 +26,6 @@ class Articles extends Component {
         return this.props.setData(response)
       })
     }
-  }
-
-  componentWillUnmount() {
-    this._unmounted = true
   }
 
   loadArticles = (response) => {
