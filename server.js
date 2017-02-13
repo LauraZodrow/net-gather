@@ -62,7 +62,7 @@ setInterval( function(){
 setInterval( function(){ 
   ArticleService.nytGrab('javascript')
   ArticleService.mediumGrab('javascript')
-}, 1000 * 180);
+}, 1000 * 220);
 //1000 * 60 * 60 * 24
 
 const server = app.listen(process.env.PORT || 3001, () => {
