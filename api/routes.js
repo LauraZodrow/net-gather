@@ -10,7 +10,7 @@ const _ = require('lodash')
 
 let config = {}
 if (process.env.NODE_ENV !== 'production') {
-  config = require('./config')
+  config = require('./api_config')
 }
 
 const routes = express.Router();

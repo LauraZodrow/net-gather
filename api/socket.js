@@ -9,7 +9,7 @@ module.exports = function(io, twitter) {
           tweetUrl = tweet.entities.media[0].expanded_url
       }
       if (tweet.user.profile_image_url) {
-          imageUrl = tweet.user.profile_image_url
+          imageUrl = tweet.user.profile_image_url_https
       }
       const newData = [
           tweet.text,
@@ -40,6 +40,7 @@ module.exports = function(io, twitter) {
   io.sockets.on('connection', function(socket){
 
     currentSockets++;
+    console.log('currentSockets', currentSockets)
 
     socket.emit('connected', currentKeyword); 
 
