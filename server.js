@@ -35,7 +35,6 @@ const cors = CORS({
     methods: ['GET', 'POST'],
     credentials: true
 })
-console.log('process.env.MONGO_URI', process.env.MONGODB_URI)
 
 mongoose.connect(process.env.MONGODB_URI || 'localhost/net-gather')
 mongoose.connection.on('error', function() {
@@ -58,13 +57,12 @@ if (process.env.NODE_ENV === 'production') {
 setInterval( function(){ 
   ArticleService.nytGrab('feminism')
   ArticleService.mediumGrab('feminism')
-}, 1000 * 60);
+}, 1000 * 60 * 60 * 24);
 
 setInterval( function(){ 
   ArticleService.nytGrab('javascript')
   ArticleService.mediumGrab('javascript')
-}, 1000 * 220);
-//1000 * 60 * 60 * 24
+}, 1000 * 60 * 60 * 12);
 
 const server = app.listen(process.env.PORT || 3001, () => {
     console.log("API listening at 3001");

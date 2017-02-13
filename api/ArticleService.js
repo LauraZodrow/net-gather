@@ -32,7 +32,6 @@ const feedLoadPromise = url => {
 }
 
 const nytGrab = function( searchTerm ) {
-  console.log('in nytGrab func')
   request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {
@@ -68,7 +67,6 @@ const nytGrab = function( searchTerm ) {
         if (err) {
           return console.log('err', err)
         }
-        console.log('A new doc was created!', doc)
       })
 
 
@@ -120,7 +118,6 @@ const mediumGrab = function( searchTerm ) {
         if (err) {
           return console.log('err', err)
         }
-        console.log('A new medium doc was created!', doc)
       })
 
     })
@@ -151,7 +148,6 @@ const mediumGrab = function( searchTerm ) {
         if (err) {
           return console.log('err', err)
         }
-        console.log('A new medium doc was created!', doc)
       })
     })
     .catch(err => {

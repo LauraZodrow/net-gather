@@ -16,7 +16,6 @@ routes.get('/nyt-articles/:view', (req, res) => {
     if (err) {
       return console.log('err', err)
     }
-    console.log('doc', doc)
     sendJson(res, doc)
   })
 
