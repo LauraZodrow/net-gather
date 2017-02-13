@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const CORS = require('cors');
 const serveStatic = require('serve-static')
 const routes = require('./api/routes')
-// const mongoose = require('mongoose');
-// const ArticleData = require('./models/articleData');
+const mongoose = require('mongoose');
 const sockets = require('./api/socket')
 const Twitter = require('twit')
+const ArticleService = require('./api/ArticleService')
 
 const twitter = new Twitter({
   consumer_key: "BSN8JOEEDLCB4EOgSJT8hTWWO",
@@ -36,10 +36,10 @@ const cors = CORS({
     credentials: true
 })
 
-// mongoose.connect(process.env.MONGO_URI || 'localhost/net-gather')
-// mongoose.connection.on('error', function() {
-//   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
-// });
+mongoose.connect(process.env.MONGO_URI || 'localhost/net-gather')
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
+});
 
 app.use(cors)
 app.use('/api', routes)
@@ -54,8 +54,19 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
+setInterval( function(){ 
+  ArticleService.nytGrab('feminism')
+  ArticleService.mediumGrab('feminism')
+}, 1000 * 60);
+
+setInterval( function(){ 
+  ArticleService.nytGrab('javascript')
+  ArticleService.mediumGrab('javascript')
+}, 1000 * 180);
+//1000 * 60 * 60 * 24
+
 const server = app.listen(process.env.PORT || 3001, () => {
-    console.log("API listening at PORT:" + process.env.PORT);
+    console.log("API listening at 3001");
 });
 
 const io = require('socket.io').listen(server);
