@@ -35,8 +35,9 @@ const cors = CORS({
     methods: ['GET', 'POST'],
     credentials: true
 })
+console.log('process.env.MONGO_URI', process.env.MONGODB_URI)
 
-mongoose.connect(process.env.MONGO_URI || 'localhost/net-gather')
+mongoose.connect(process.env.MONGODB_URI || 'localhost/net-gather')
 mongoose.connection.on('error', function() {
   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
 });
