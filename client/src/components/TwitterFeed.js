@@ -42,13 +42,13 @@ class TwitterFeed extends Component {
   }
 
   render() {
-    if(!this.props.data) {
+    if(!this.props.tweets) {
       return null
     }
     return(
       <div>
           { this.state.twitterStatusMessage ? <p className="twit-status-msg">{ this.state.twitterStatusMessage }</p> : null }
-          { this.props.data.map(function(tweet, index) {
+          { this.props.tweets.map(function(tweet, index) {
               return (
                 <Tweets
                   key={ index }

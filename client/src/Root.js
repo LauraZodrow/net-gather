@@ -42,7 +42,6 @@ class Root extends Component {
                     stream='twitter-feminism-stream'
                     tweets={this.props.feminismTweets} 
                     setTweets={this.props.setFeminismTweets} 
-                    data={ this.props.feminismTweets }
                   />
                 </div>
                 <ChatRoom 
@@ -54,7 +53,7 @@ class Root extends Component {
                     stream='twitter-javascript-stream'
                     tweets={ this.props.javascriptTweets } 
                     setTweets={this.props.setJavascriptTweets} 
-                    data={ this.props.javascriptTweets }/>
+                  />
                 </div>
               </Modal>
 
