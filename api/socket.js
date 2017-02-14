@@ -29,6 +29,7 @@ module.exports = function(io, twitter) {
                 imageUrl,
                 tweet.user.screen_name
             ]
+            console.log('newData', newData)
             io.sockets.emit("twitter-feminism-stream", newData);
         })
         feminismStream.on('error', function(error) {

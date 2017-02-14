@@ -25,6 +25,7 @@ class TwitterFeed extends Component {
   }
 
   loadTwitterFeed = (tweet) => {
+    console.log(tweet)
     const tweetArr = [tweet]
     const combineData = [tweetArr].concat(this.props.tweets);
     if (combineData.length >= 20) {
