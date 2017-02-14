@@ -12,7 +12,6 @@ module.exports = function(io, twitter) {
         io.sockets.emit('chat message', msg);
     });
 
-    console.log('feminismStream', feminismStream)
     if (feminismStream === null) {    
         feminismStream = twitter.stream('statuses/filter', {track : 'feminism', language: 'en'})
         feminismStream.on('tweet', function (tweet) {
@@ -40,8 +39,6 @@ module.exports = function(io, twitter) {
             io.sockets.emit("limit");
         })
     }
-
-    console.log('javascriptStream', javascriptStream)
 
     if (javascriptStream === null) {    
         javascriptStream = twitter.stream('statuses/filter', {track : 'javascript,react.js', language: 'en'})
