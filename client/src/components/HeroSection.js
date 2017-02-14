@@ -13,6 +13,10 @@ class HeroSection extends Component {
       this.props.setTwitterBtnText(view)
   }
 
+  handleShowFeed = () => {
+    this.props.setDisplayChatModal(true)
+  }
+
   render() {
     const heroImage = heroImg || '/img/hero-color.jpg'
     const heroStyles = {
@@ -20,7 +24,7 @@ class HeroSection extends Component {
     }
     return(
         <div style={ heroStyles } className="hero-container">
-          <TwitterFeed view={ this.props.view } twitterBtnText={this.props.twitterBtnText} />
+          <button className="round-button twitter-feed-btn" onClick={ this.handleShowFeed }>Chat about <br/>#feminism and #javascript</button>
           <div className="center-text">
             <h1>I'm interested in coding and feminism.</h1>
             <p className="sub-heading">binge <span className="line-through">watch</span> read</p>

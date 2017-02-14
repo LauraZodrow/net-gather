@@ -1,7 +1,9 @@
 /* eslint no-fallthrough: 0 react/no-multi-comp: 0*/
 export const SET_DISPLAY_VIEW = 'view: SET DISPLAY VIEW'
 export const SET_DATA = 'view: SET DATA'
-export const SET_TWITTER_BTN_TEXT = 'view: SET TWITTER BTN TEXT'
+export const SET_DISPLAY_CHAT_MODAL = 'view: SET DISPLAY CHAT MODAL'
+export const SET_FEMINISM_TWEETS = 'view: SET FEMINISM TWEETS'
+export const SET_JAVASCRIPT_TWEETS = 'view: SET JAVASCRIPT TWEETS'
  
 // function calls action creater setTokenId 
 // that returns the object with type and payload and that's called the action
@@ -15,10 +17,18 @@ export const VIEW_ACTION_CREATORS = {
         type: SET_DATA,
         payload: data 
     }),
-    setTwitterBtnText: (text) => ({
-        type: SET_TWITTER_BTN_TEXT,
-        payload: { text }
+    setDisplayChatModal: (bool) => ({
+        type: SET_DISPLAY_CHAT_MODAL,
+        payload: bool
     }),
+    setFeminismTweets: (data) => ({
+        type: SET_FEMINISM_TWEETS,
+        payload: data 
+    }),
+    setJavascriptTweets: (data) => ({
+        type: SET_JAVASCRIPT_TWEETS,
+        payload: data 
+    })
 }
 
 // const view = localStorage.getItem('view')
@@ -31,7 +41,9 @@ export const INITIAL_STATE = {
     displayView: true,
     view: 'feminism',
     data: [],
-    twitterBtnText: 'feminism'
+    displayChatModal: false,
+    feminismTweets: [],
+    javascriptTweets: [],
 }
 
 // the store then calls this function with the action object
@@ -58,12 +70,30 @@ export default function viewReducer(state = INITIAL_STATE, action) {
             }
         }
 
-        case SET_TWITTER_BTN_TEXT: {
-            const { text } = action.payload
-            
+        case SET_DISPLAY_CHAT_MODAL: {
+            const bool = action.payload
+
             return {
                 ...state,
-                twitterBtnText: text
+                displayChatModal: bool
+            }
+        }
+
+        case SET_FEMINISM_TWEETS: {
+            const data = action.payload
+
+            return {
+                ...state,
+                feminismTweets: data
+            }
+        }
+
+        case SET_JAVASCRIPT_TWEETS: {
+            const data = action.payload
+
+            return {
+                ...state,
+                javascriptTweets: data
             }
         }
 

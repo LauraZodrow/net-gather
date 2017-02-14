@@ -47,19 +47,21 @@ body {
 .hero-container {
     background-size: cover;
     background-position: center;
-    height: 400px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     .center-text {
         width: 100%;
         text-align: center;
+        // margin-top: 10%;
+        // position: absolute;
     }
     h1 {
         color: $pink;
         font-size: 45px;
         line-height: 50px;
+        margin-top: 0px;
     }
     .sub-heading {
         color: $white;
@@ -153,6 +155,15 @@ footer {
     i {
         margin-right: 5px;
     }
+    .disclaimer {
+        font-size: 12px;
+        margin: 0px auto;
+    }
+    .disclaimer-heading {
+        font-size: 12px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
     .footer-heading {
         margin-bottom: 25px;
     }
@@ -219,16 +230,16 @@ footer {
 // }
 
 
-// .slide-container {
-//     width: 100vw;
-//     height: 100vh;
-//     .hero-container {
-//         width: 100vw;
-//         height: 45%;
-//         animation: 10s slide-up ease;
-//         //margin-top:0%;
-//     }
-// }
+.view-container {
+    width: 100vw;
+    height: 100vh;
+    .hero-container {
+        width: 100vw;
+        height: 55%;
+        //animation: 2s slide-up ease;
+        //margin-top:0%;
+    }
+}
 
 // @keyframes slide-up {
 //   from {
@@ -238,61 +249,56 @@ footer {
 
 //   to {
 //     margin-top: 0%;
-//     height: 45%;
+//     height: 55%;
 //   }
 // }
 
-.twitterFeedSidebarContainer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 40%;
-    background-color: $darkGray;
-    height: 100%;
-    z-index: 3;
-    padding: 30px 20px;
-    overflow: scroll;
-    .tweet {
-        margin: 15px auto;
-        border: 1px solid lightgray;
-        border-radius: 30px;
-        padding: 20px 25px;
-        overflow: hidden;
-        background-color: #fff;
-        .profile-img {
-            width: 13%;
-            display: inline-block;
-            vertical-align: top;
-        }
-        .text {
-            width: 87%;
-            display: inline-block;
-            p {
-                margin: 0px auto;
-            }
-            .username {
-                color: gray;
-                text-decoration: none;
-                margin-bottom: 4px;
-            }
+.tweet {
+    margin: 15px auto;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 20px 25px;
+    overflow: hidden;
+    text-align: left;
+    background-color: #fff;
+    .profile-img {
+        width: 13%;
+        display: inline-block;
+        vertical-align: top;
+        img {
+            max-width: 100%;
         }
     }
-    .twit-status-msg {
-        color: $white;
-        margin-top: 40%;
-        width: 100%;
-        text-align: center;
-    }
-    .close-sidebar {
-        position: absolute;
-        left: 10px;
-        font-size: 20px;
-        top: 10px;
-        border: none;
-        color: $pink;
-        background: transparent;
+    .text {
+        width: 83%;
+        display: inline-block;
+        margin-left: 3%;
+        p {
+            margin: 0px auto;
+        }
+        .username {
+            color: gray;
+            text-decoration: none;
+            margin-bottom: 4px;
+        }
     }
 }
+.twit-status-msg {
+    color: $white;
+    margin-top: 40%;
+    width: 100%;
+    text-align: center;
+}
+.close-sidebar {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    top: 10px;
+    border: none;
+    color: $pink;
+    background: transparent;
+}
+
 
 .twitter-feed-btn {
     position: absolute;
@@ -300,7 +306,96 @@ footer {
     top: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    .twitter-view {
-        text-transform: uppercase;
+    line-height: 22px;
+}
+
+.chat-room-container {
+    height: 100%;
+    form { 
+        background: $darkGray; 
+        padding: 3px; 
+        position: absolute; 
+        width: 40.1%;
+        bottom: 0; 
+        margin-left: 30%;
+    }
+    form input { 
+        border: 0; 
+        padding: 10px; 
+        width: 84%; 
+        margin-right: .7%; 
+    }
+    form { 
+        .submit-btn {
+            width: 15%; 
+            background: $pink; 
+            border: none; 
+            border-radius: 5px;
+            margin-right: 0px;
+        } 
+    }
+    .chat-room-messages { 
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0; 
+        width: 40.1%;
+        margin-left: 30%;
+    }
+    .chat-room-messages { 
+        li {
+             padding: 5px 10px;
+        } 
+    }
+    .chat-room-messages {
+        li {
+            &:nth-child(odd) { 
+                background: #eee; 
+            }
+        }
+    }
+    .close-modal {
+        top: 0;
+        width: 100%;
+        text-align: center;
+        z-index: -1;
+        cursor: pointer;
+        padding-top: .5%;
+        padding-bottom: .5%;
+        background-color: $green;
+        color: $white;
     }
 }
+
+.twitter-feed-right-sidebar {
+        height: 100%;
+        width: 10%;
+        position:absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 30%;
+        text-align: center;
+        padding: 10px;
+        margin-right: -1px;
+        overflow: scroll;
+        background-color: $darkGray;
+        .sidebar-javascript {
+            background-color: $darkGray;
+            border: none;
+            color: $white;
+            font-size: 18px;
+            text-align: center;
+            padding: 5px;
+            margin: 0px 5%;
+            color: $pink;
+        }
+    }
+    .twitter-feed-left-sidebar {
+        @extend .twitter-feed-right-sidebar;
+        margin-right: 0px;
+        left: 0;
+        right: initial;
+        .sidebar-feminism {
+            @extend .sidebar-javascript;
+        }
+    }
