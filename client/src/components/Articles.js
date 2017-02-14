@@ -39,7 +39,6 @@ class Articles extends Component {
     return(
       <div>
         { this.props.data.map( (item, index) => {
-          console.log('item', item)
             return (
               <Slider 
                 key={ index } 
