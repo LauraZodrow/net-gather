@@ -5,10 +5,20 @@ import setLocalStorage from '../utils/setLocalStorage'
 
 class HeroSection extends Component {
 
+  state = {
+    javascript: null,
+    feminism: 'active'
+  }
+
   handleViewSwitch = (view) => () => {
       setLocalStorage(view)
+      console.log('view', view)
       this.props.setDisplayView(view)
-      this.props.setTwitterBtnText(view)
+      if (view === 'feminism') {
+        this.setState({feminism: 'active', javascript: 'null'})
+      } else {
+        this.setState({javascript: 'active', feminism: 'null'})
+      }
   }
 
   handleShowFeed = () => {
@@ -27,8 +37,8 @@ class HeroSection extends Component {
             <h1>I'm interested in coding and feminism.</h1>
             <p className="sub-heading">binge <span className="line-through">watch</span> read</p>
             <div>
-              <button onClick={ this.handleViewSwitch('javascript') } className="round-button">Javascript</button>
-              <button onClick={ this.handleViewSwitch('feminism') } className="round-button">Feminism</button>
+              <button onClick={ this.handleViewSwitch('javascript') } className={"round-button" + " " + this.state.javascript}>Javascript</button>
+              <button onClick={ this.handleViewSwitch('feminism') } className={"round-button" + " " + this.state.feminism}>Feminism</button>
             </div>
           </div>
         </div>

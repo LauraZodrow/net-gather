@@ -34,6 +34,10 @@ body {
     font-size: 20px;
     cursor: pointer;
     color: $pink;
+    &.active {
+       background: $pink; 
+       color: $white;
+    }
 } 
 
 .white-round-btn {

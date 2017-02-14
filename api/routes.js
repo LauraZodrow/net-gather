@@ -23,11 +23,13 @@ routes.get('/nyt-articles/:view', (req, res) => {
 
 routes.get('/medium/:view', (req, res) => { 
   const view = req.params.view
+  console.log('view', view)
   const query = { category: view, type: 'medium' };
   Article.findOne(query, function(err, doc){
     if (err) {
       return console.log('err', err)
     }
+    console.log('doc', doc)
     sendJson(res, doc)
   })
 });
