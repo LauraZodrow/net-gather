@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { VIEW_ACTION_CREATORS } from './state/reducers/view_reducer'
 import Footer from './components/Footer'
 import Articles from './components/Articles'
-import Events from './components/Events'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Modal from './components/Modal'
 import ChatRoom from './components/ChatRoom'
@@ -31,7 +30,6 @@ class Root extends Component {
                 data= { this.props.data }
                 setData={ this.props.setData }
               />
-              <Events/>
               <Modal
                 displayChatModal={ this.props.displayChatModal }
                 setDisplayChatModal={ this.props.setDisplayChatModal }

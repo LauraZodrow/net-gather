@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ReactModal from "react-modal"
-import TwitterFeed from './TwitterFeed'
-import ChatRoom from './ChatRoom'
 
 const modalStyles = {
   overlay : {

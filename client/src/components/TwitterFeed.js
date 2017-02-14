@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client'
 import Tweets from './Tweets'
-import ChatRoom from './ChatRoom'
 
 let socket
 if (process.env.NODE_ENV === 'production') {

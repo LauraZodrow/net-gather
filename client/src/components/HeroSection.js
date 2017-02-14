@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import heroImg from '../assets/hero-color.jpg'
 import setLocalStorage from '../utils/setLocalStorage'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import TwitterFeed from './TwitterFeed'
 
 class HeroSection extends Component {
 

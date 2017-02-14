@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import client from '../utils/fetch_helper.js'
-import _ from 'lodash'
 import Slide from './Slide'
 
 class Slider extends Component {
