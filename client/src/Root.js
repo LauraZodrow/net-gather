@@ -16,7 +16,6 @@ class Root extends Component {
   componentDidMount() {
     client.get('/tweets-feminism')
     .then((response => {
-      console.log('response', response)
       return this.props.setFeminismTweets(response)
     }).bind(this))
     client.get('/tweets-javascript')

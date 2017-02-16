@@ -12,10 +12,6 @@ if (process.env.NODE_ENV === 'production') {
 
 class TwitterFeed extends Component {
 
-  state = {
-    twitterStatusMessage: '',
-  }
-
   componentDidMount() {
     socket.on(this.props.stream, this.loadTwitterFeed)
     socket.on("limit", this.showFeedError)
@@ -33,21 +29,13 @@ class TwitterFeed extends Component {
       this.props.setTweets(newArr)
     } else {
       this.props.setTweets(combineData)
-      this.setState({ twitterStatusMessage: null })
     }
-    console.log('this.props.tweets', this.props.tweets)
-  }
-
-  showFeedError = () => {
-      this.setState({ twitterStatusMessage: 'Twitter streaming limit hit, please try again later' })
   }
 
   render() {
     return(
       <div>
-          { this.state.twitterStatusMessage ? <p className="twit-status-msg">{ this.state.twitterStatusMessage }</p> : null }
           { this.props.tweets.map(function(tweet, index) {
-            console.log('tweet',tweet)
               return (
                 <Tweets
                   key={ index }

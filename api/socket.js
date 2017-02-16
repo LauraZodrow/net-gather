@@ -4,90 +4,99 @@ const mongoose = require('mongoose');
 
 module.exports = function(io, twitter) {
 
+  // var createStream = function(streamName, keyword) {
+  //   streamName = twitter.stream('statuses/filter', {track : keyword, language: 'en'})
+  //   streamName.on('tweet', function (tweet) {
+  //     console.log(' in tweets tream')
+  //       let tweetUrl = null
+  //       let imageUrl = null
+  //       if (tweet.entities.media) {
+  //           tweetUrl = tweet.entities.media[0].expanded_url
+  //       }
+  //       if (tweet.user.profile_image_url) {
+  //           imageUrl = tweet.user.profile_image_url_https
+  //       }
+  //       const newData = [
+  //           tweet.text,
+  //           tweetUrl,
+  //           imageUrl,
+  //           tweet.user.screen_name
+  //       ]
+  //       io.sockets.emit("twitter-"+keyword+"-stream", newData);
+  //   })
+  //   streamName.on('error', function(error) {
+  //       return console.log('error', error)
+  //   })
+  //   streamName.on('limit', function (limitMessage) {
+  //       io.sockets.emit("limit");
+  //   })
+  //   return streamName
+  // }
+
+  let streamFem = 0
   let feminismStream = null
   let javascriptStream = null
   let currentSockets = 0
 
   io.sockets.on('connection', function(socket){
     currentSockets++;
-    console.log('currentSockets', currentSockets)
 
     socket.on('chat message', function(msg){
         io.sockets.emit('chat message', msg);
     });
 
-    if (feminismStream === null) {    
-        feminismStream = twitter.stream('statuses/filter', {track : 'feminism', language: 'en'})
-        feminismStream.on('tweet', function (tweet) {
-            let tweetUrl = null
-            let imageUrl = null
-            if (tweet.entities.media) {
-                tweetUrl = tweet.entities.media[0].expanded_url
-            }
-            if (tweet.user.profile_image_url) {
-                imageUrl = tweet.user.profile_image_url_https
-            }
-            const newData = [
-                tweet.text,
-                tweetUrl,
-                imageUrl,
-                tweet.user.screen_name
-            ]
-            // console.log('newData', newData)
-            // var data = FeminismTweet({
-            //     array: newData
-            // });
-            // console.log('data', data)
-            // data.save(function(err) {
-            // if (err) throw err;
-
-            // console.log('feminism tweet saved successfully!');
-            // });
-            io.sockets.emit("twitter-feminism-stream", newData);
-        })
-        feminismStream.on('error', function(error) {
-            return console.log('error', error)
-        })
-        feminismStream.on('limit', function (limitMessage) {
-            io.sockets.emit("limit");
-        })
+    if (feminismStream === null) { 
+      feminismStream = twitter.stream('statuses/filter', {track : 'feminism', language: 'en'})
+      feminismStream.on('tweet', function (tweet) {
+          let tweetUrl = null
+          let imageUrl = null
+          if (tweet.entities.media) {
+              tweetUrl = tweet.entities.media[0].expanded_url
+          }
+          if (tweet.user.profile_image_url) {
+              imageUrl = tweet.user.profile_image_url_https
+          }
+          const newData = [
+              tweet.text,
+              tweetUrl,
+              imageUrl,
+              tweet.user.screen_name
+          ]
+          io.sockets.emit("twitter-feminism-stream", newData);
+      })
+      feminismStream.on('error', function(error) {
+          return console.log('error', error)
+      })
+      feminismStream.on('limit', function (limitMessage) {
+          io.sockets.emit("limit");
+      })
     }
 
-   if (javascriptStream === null) {    
-        javascriptStream = twitter.stream('statuses/filter', {track : 'javascript,react.js', language: 'en'})
-        javascriptStream.on('tweet', function (tweet) {
-            let tweetUrl = null
-            let imageUrl = null
-            if (tweet.entities.media) {
-                tweetUrl = tweet.entities.media[0].expanded_url
-            }
-            if (tweet.user.profile_image_url) {
-                imageUrl = tweet.user.profile_image_url_https
-            }
-            const newData = [
-                tweet.text,
-                tweetUrl,
-                imageUrl,
-                tweet.user.screen_name
-            ]
-            // console.log('newData', newData)
-            // var data = JavascriptTweet({
-            //     array: newData
-            // });
-            // console.log('data', data)
-            // data.save(function(err) {
-            // if (err) throw err;
-
-            // console.log('javascript tweet saved successfully!');
-            // });
-            io.sockets.emit("twitter-javascript-stream", newData);
-        })
-        javascriptStream.on('error', function(error) {
-            return console.log('error', error)
-        })
-        javascriptStream.on('limit', function (limitMessage) {
-            io.sockets.emit("limit");
-        })
+   if (javascriptStream === null) { 
+      javascriptStream = twitter.stream('statuses/filter', {track : 'javascript,react.js', language: 'en'})
+      javascriptStream.on('tweet', function (tweet) {
+          let tweetUrl = null
+          let imageUrl = null
+          if (tweet.entities.media) {
+              tweetUrl = tweet.entities.media[0].expanded_url
+          }
+          if (tweet.user.profile_image_url) {
+              imageUrl = tweet.user.profile_image_url_https
+          }
+          const newData = [
+              tweet.text,
+              tweetUrl,
+              imageUrl,
+              tweet.user.screen_name
+          ]
+          io.sockets.emit("twitter-javascript-stream", newData);
+      })
+      javascriptStream.on('error', function(error) {
+          return console.log('error', error)
+      })
+      javascriptStream.on('limit', function (limitMessage) {
+          io.sockets.emit("limit");
+      })
    }
 
     socket.on('disconnect', function () {

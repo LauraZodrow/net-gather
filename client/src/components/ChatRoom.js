@@ -15,9 +15,7 @@ class ChatRoom extends Component {
     super(props);
     this.state = {
       value: '',
-      messages: [],
-      displayJavascriptFeed: false,
-      displayFeminismFeed: true
+      messages: []
     };
   }
 
