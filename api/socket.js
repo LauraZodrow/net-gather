@@ -33,16 +33,16 @@ module.exports = function(io, twitter) {
                 imageUrl,
                 tweet.user.screen_name
             ]
-            console.log('newData', newData)
-            var data = FeminismTweet({
-                array: newData
-            });
-            console.log('data', data)
-            data.save(function(err) {
-            if (err) throw err;
+            // console.log('newData', newData)
+            // var data = FeminismTweet({
+            //     array: newData
+            // });
+            // console.log('data', data)
+            // data.save(function(err) {
+            // if (err) throw err;
 
-            console.log('feminism tweet saved successfully!');
-            });
+            // console.log('feminism tweet saved successfully!');
+            // });
             io.sockets.emit("twitter-feminism-stream", newData);
         })
         feminismStream.on('error', function(error) {
@@ -70,16 +70,16 @@ module.exports = function(io, twitter) {
                 imageUrl,
                 tweet.user.screen_name
             ]
-            console.log('newData', newData)
-            var data = JavascriptTweet({
-                array: newData
-            });
-            console.log('data', data)
-            data.save(function(err) {
-            if (err) throw err;
+            // console.log('newData', newData)
+            // var data = JavascriptTweet({
+            //     array: newData
+            // });
+            // console.log('data', data)
+            // data.save(function(err) {
+            // if (err) throw err;
 
-            console.log('javascript tweet saved successfully!');
-            });
+            // console.log('javascript tweet saved successfully!');
+            // });
             io.sockets.emit("twitter-javascript-stream", newData);
         })
         javascriptStream.on('error', function(error) {
