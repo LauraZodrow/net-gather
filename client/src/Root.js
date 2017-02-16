@@ -9,9 +9,21 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Modal from './components/Modal'
 import ChatRoom from './components/ChatRoom'
 import TwitterFeed from './components/TwitterFeed'
+import client from './utils/fetch_helper'
 import './index.scss'
 
 class Root extends Component {
+  componentDidMount() {
+    client.get('/tweets-feminism')
+    .then((response => {
+      console.log('response', response)
+      return this.props.setFeminismTweets(response)
+    }).bind(this))
+    client.get('/tweets-javascript')
+    .then((response => {
+      return this.props.setJavascriptTweets(response)
+    }).bind(this))
+  }
   render() {
     return(
         <div className="view-container">

@@ -41,12 +41,7 @@ const handleResponse = response => {
         } else if (contentType.startsWith('text')) {
             // Response content is text, get the text
             return response.text()
-        } else if (contentType.startsWith('application/pdf')) {
-            var filename = new Blob([response], {type: 'application/pdf'});
-            let url = URL.createObjectURL(filename);
-            window.open(url)
-            return response.blob()
-        } else {
+        }  else {
             // What is this response? Throw an error
             Promise.reject({ status: response.status, error: 'Unexpected content type' })
         }

@@ -1,3 +1,7 @@
+const FeminismTweet = require('../models/feminismTweet')
+const JavascriptTweet = require('../models/javascriptTweet')
+const mongoose = require('mongoose');
+
 module.exports = function(io, twitter) {
 
   let feminismStream = null
@@ -5,8 +9,8 @@ module.exports = function(io, twitter) {
   let currentSockets = 0
 
   io.sockets.on('connection', function(socket){
-
     currentSockets++;
+    console.log('currentSockets', currentSockets)
 
     socket.on('chat message', function(msg){
         io.sockets.emit('chat message', msg);
@@ -30,6 +34,15 @@ module.exports = function(io, twitter) {
                 tweet.user.screen_name
             ]
             console.log('newData', newData)
+            var data = FeminismTweet({
+                array: newData
+            });
+            console.log('data', data)
+            data.save(function(err) {
+            if (err) throw err;
+
+            console.log('feminism tweet saved successfully!');
+            });
             io.sockets.emit("twitter-feminism-stream", newData);
         })
         feminismStream.on('error', function(error) {
@@ -40,7 +53,7 @@ module.exports = function(io, twitter) {
         })
     }
 
-    if (javascriptStream === null) {    
+   if (javascriptStream === null) {    
         javascriptStream = twitter.stream('statuses/filter', {track : 'javascript,react.js', language: 'en'})
         javascriptStream.on('tweet', function (tweet) {
             let tweetUrl = null
@@ -57,6 +70,16 @@ module.exports = function(io, twitter) {
                 imageUrl,
                 tweet.user.screen_name
             ]
+            console.log('newData', newData)
+            var data = JavascriptTweet({
+                array: newData
+            });
+            console.log('data', data)
+            data.save(function(err) {
+            if (err) throw err;
+
+            console.log('javascript tweet saved successfully!');
+            });
             io.sockets.emit("twitter-javascript-stream", newData);
         })
         javascriptStream.on('error', function(error) {
@@ -65,7 +88,7 @@ module.exports = function(io, twitter) {
         javascriptStream.on('limit', function (limitMessage) {
             io.sockets.emit("limit");
         })
-    }
+   }
 
     socket.on('disconnect', function () {
         currentSockets--; 

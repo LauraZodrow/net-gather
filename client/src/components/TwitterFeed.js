@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client'
 import Tweets from './Tweets'
+import client from '../utils/fetch_helper'
 
 let socket
 if (process.env.NODE_ENV === 'production') {
@@ -12,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
 class TwitterFeed extends Component {
 
   state = {
-    twitterStatusMessage: 'Twitter feed is loading, please wait',
+    twitterStatusMessage: '',
   }
 
   componentDidMount() {
@@ -34,6 +35,7 @@ class TwitterFeed extends Component {
       this.props.setTweets(combineData)
       this.setState({ twitterStatusMessage: null })
     }
+    console.log('this.props.tweets', this.props.tweets)
   }
 
   showFeedError = () => {
@@ -41,13 +43,11 @@ class TwitterFeed extends Component {
   }
 
   render() {
-    if(!this.props.tweets) {
-      return null
-    }
     return(
       <div>
           { this.state.twitterStatusMessage ? <p className="twit-status-msg">{ this.state.twitterStatusMessage }</p> : null }
           { this.props.tweets.map(function(tweet, index) {
+            console.log('tweet',tweet)
               return (
                 <Tweets
                   key={ index }

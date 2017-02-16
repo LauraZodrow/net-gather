@@ -1,4 +1,6 @@
 /* eslint no-fallthrough: 0 react/no-multi-comp: 0*/
+import client from '../../utils/fetch_helper'
+
 export const SET_DISPLAY_VIEW = 'view: SET DISPLAY VIEW'
 export const SET_DATA = 'view: SET DATA'
 export const SET_DISPLAY_CHAT_MODAL = 'view: SET DISPLAY CHAT MODAL'
@@ -30,12 +32,6 @@ export const VIEW_ACTION_CREATORS = {
         payload: data 
     })
 }
-
-// const view = localStorage.getItem('view')
-// let displayView = false
-// if (view) {
-//   displayView = true
-// } 
 
 export const INITIAL_STATE = {
     displayView: true,
