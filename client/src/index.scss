@@ -50,6 +50,10 @@ body {
     color: #fff;
     border: 1px solid $white;
     font-size: 14px;
+    &:hover {
+       border-color: $pink; 
+       background: none;
+    }
 }
 
 .hero-container {
