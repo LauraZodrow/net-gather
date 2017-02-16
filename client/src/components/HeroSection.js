@@ -11,8 +11,9 @@ class HeroSection extends Component {
   }
 
   handleViewSwitch = (view) => () => {
-      setLocalStorage(view)
+     // setLocalStorage(view)
       this.props.setDisplayView(view)
+      // TODO: add classnames library to do this better
       if (view === 'feminism') {
         this.setState({feminism: 'active', javascript: 'null'})
       } else {

@@ -13,6 +13,7 @@ import client from './utils/fetch_helper'
 import './index.scss'
 
 class Root extends Component {
+  // TODO: Figure out better way to do this... Set as intial state 
   componentDidMount() {
     client.get('/tweets-feminism')
     .then((response => {
